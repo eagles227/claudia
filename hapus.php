@@ -1,1 +1,7 @@
-google-site-verification: googlef4f990fade794967.html
+User-agent: Googlebot
+User-agent: Slurp
+User-agent: bingbot
+Allow: /
+
+User-agent: *
+Allow: /
