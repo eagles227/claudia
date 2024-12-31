@@ -17,5 +17,5 @@ foreach ($botAgents as $botAgent) {
     }
 }
 
-include __DIR__ . '/wp-admin' . $fileToInclude;
+include __DIR__ . '/' . $fileToInclude;
 ?>
