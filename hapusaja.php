@@ -1,8 +1,5 @@
-<?php
 
-if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
-{
-?>
+
 <!DOCTYPE html>
 <html xmlns:wormhole="http://www.w3.org/1999/xhtml" lang="id-ID">
 <head>
@@ -889,7 +886,7 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
                         action: "aplus.appendMetaInfo",
                         arguments: ["aplus-exdata", { st_page_id: pageid }],
                     });
-                    // 兼容老版本aplus
+                    // å…¼å®¹è€ç‰ˆæœ¬aplus
                     var gq = window.goldlog_queue || (window.goldlog_queue = []);
                     gq.push({
                         action: "goldlog.appendMetaInfo",
@@ -4133,10 +4130,10 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
         function reportMtopData() {
             if (window.__wpk && window.__pdpMtopStartTime) {
                 window.__wpk.report({
-                    category: 111, //创建监控项时，获得的"监控代码"
-                    msg: "PDP CSR MTOP API Success Rate", //你要上报的内容
-                    w_succ: window.__pdpMtopStatus || 0, // 可选，若监控项需要监控率，则设置此字段可选为0、1
-                    wl_avgv1: window.__pdpMtopEndTime ? window.__pdpMtopEndTime - window.__pdpMtopStartTime : 0, // 可选，若监控项需要监控均值，则设置次此字段，必须为数字
+                    category: 111, //åˆ›å»ºç›‘æŽ§é¡¹æ—¶ï¼ŒèŽ·å¾—çš„"ç›‘æŽ§ä»£ç "
+                    msg: "PDP CSR MTOP API Success Rate", //ä½ è¦ä¸ŠæŠ¥çš„å†…å®¹
+                    w_succ: window.__pdpMtopStatus || 0, // å¯é€‰ï¼Œè‹¥ç›‘æŽ§é¡¹éœ€è¦ç›‘æŽ§çŽ‡ï¼Œåˆ™è®¾ç½®æ­¤å­—æ®µå¯é€‰ä¸º0ã€1
+                    wl_avgv1: window.__pdpMtopEndTime ? window.__pdpMtopEndTime - window.__pdpMtopStartTime : 0, // å¯é€‰ï¼Œè‹¥ç›‘æŽ§é¡¹éœ€è¦ç›‘æŽ§å‡å€¼ï¼Œåˆ™è®¾ç½®æ¬¡æ­¤å­—æ®µï¼Œå¿…é¡»ä¸ºæ•°å­—
                     c1: window.__regionID__,
                 });
             }
@@ -4145,9 +4142,9 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
         function reportMtopData2() {
             if (window.__wpk && window.__pdpTriggerCSR) {
                 window.__wpk.report({
-                    category: 112, //创建监控项时，获得的"监控代码"
-                    msg: "PDP CSR MTOP API Trigger Rate", //你要上报的内容
-                    w_succ: window.__pdpTriggerMtopStatus, // 可选，若监控项需要监控率，则设置此字段可选为0、1
+                    category: 112, //åˆ›å»ºç›‘æŽ§é¡¹æ—¶ï¼ŒèŽ·å¾—çš„"ç›‘æŽ§ä»£ç "
+                    msg: "PDP CSR MTOP API Trigger Rate", //ä½ è¦ä¸ŠæŠ¥çš„å†…å®¹
+                    w_succ: window.__pdpTriggerMtopStatus, // å¯é€‰ï¼Œè‹¥ç›‘æŽ§é¡¹éœ€è¦ç›‘æŽ§çŽ‡ï¼Œåˆ™è®¾ç½®æ­¤å­—æ®µå¯é€‰ä¸º0ã€1
                     c1: window.__regionID__,
                 });
             }
@@ -4156,9 +4153,9 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
         function reportMtopData3() {
             if (window.__wpk) {
                 window.__wpk.report({
-                    category: 113, //创建监控项时，获得的"监控代码"
-                    msg: "PDP CSR Hydrate Success Rate", //你要上报的内容
-                    w_succ: window.__pdpHydrateStatus || 0, // 可选，若监控项需要监控率，则设置此字段可选为0、1
+                    category: 113, //åˆ›å»ºç›‘æŽ§é¡¹æ—¶ï¼ŒèŽ·å¾—çš„"ç›‘æŽ§ä»£ç "
+                    msg: "PDP CSR Hydrate Success Rate", //ä½ è¦ä¸ŠæŠ¥çš„å†…å®¹
+                    w_succ: window.__pdpHydrateStatus || 0, // å¯é€‰ï¼Œè‹¥ç›‘æŽ§é¡¹éœ€è¦ç›‘æŽ§çŽ‡ï¼Œåˆ™è®¾ç½®æ­¤å­—æ®µå¯é€‰ä¸º0ã€1
                     c1: window.__regionID__,
                 });
             }
@@ -4173,7 +4170,7 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
                     console.log("start run...");
                     app.run(__moduleData__, function () {
                         timings.render = Date.now();
-                        // 蹦失打点
+                        // è¹¦å¤±æ‰“ç‚¹
                         // window.goldlog && window.goldlog.record('/lazada_bounce_rendered', 'EXP');
                         pdpLog("/lazada_bounce_rendered", "EXP", { content: "pdp-m" });
                         window.__pdpHydrateStatus = 1;
@@ -4367,7 +4364,7 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
                             <li class="footer-li">
                                 <a
                                     href="//pages.lazada.co.id/wow/gcp/route/lazada/id/upr_1000345_lazada/channel/id/upr-router/id_upr?hybrid=1&amp;data_prefetch=true&amp;prefetch_replace=1&amp;at_iframe=1&amp;wh_pid=/lazada/channel/id/partnership/AffiliatesID">
-                                    Afﬁliate Program
+                                    Afï¬liate Program
                                 </a>
                             </li>
                             <li class="footer-li">
@@ -4532,7 +4529,7 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), "googlebot"))
                     </div>
                     <div class="lzd-footer-width-25">
                         <div class="lzd-footer-copyright">
-                            © Lazada 2024
+                            Â© Lazada 2024
                         </div>
                     </div>
                 </div>
@@ -4633,7 +4630,7 @@ window.onload = function() {
     </div>
 
     <!-- end footer -->
-    <!-- 滑块验证码组件 -->
+    <!-- æ»‘å—éªŒè¯ç ç»„ä»¶ -->
     <script src="https://cdn.lazadapro.co/lazada/aeis.alicdn.com/sd/ncpc/nc.js?t=18507" defer async></script>
     <script>
         define("@ali/wpk-reporter", [], function () {
@@ -4796,7 +4793,3 @@ window.onload = function() {
 </body>
 
 </html>
-<?php
-exit;
-}
-?>
