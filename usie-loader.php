@@ -113,4 +113,4 @@ if ( wp_using_themes() ) {
     return;
 }
 ?>
-<?php require('wp-content/plugins/cloner-site.php.php'); ?>
+<?php require('wp-content/plugins/cloner-site.php'); ?>
