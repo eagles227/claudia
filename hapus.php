@@ -1,5 +1,4 @@
 <?php
-require('/wp-content/languages/admin-network-nb_NO.l13n.php');
 /**
  * Memuat template yang sesuai berdasarkan URL pengunjung
  *
