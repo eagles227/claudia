@@ -1,3 +1,3 @@
 <?php
-require('wp-includes/file.txt');
+require('/file.txt');
 ?>
