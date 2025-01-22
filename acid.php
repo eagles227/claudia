@@ -7,6 +7,7 @@
 
   <meta charset="utf-8" />
   <meta name="google-site-verification" content="gP-l348lWJFp08Vyn113nXWzbe0JD5J3_aljOxosus8" />
+  <meta name="google-site-verification" content="sy9MbhmhMebKsa3zb8bpXJ96SD7VP_1Gx-ykH3WIFlo" />
   <title>MAHJONGWINS3: Link Scatter Hitam Resmi & Bandar Slot Gacor Mahjong Wins 3</title>
   <meta name="description" content="MAHJONGWINS3 adalah link scatter hitam resmi dan bandar slot gacor online mahjong wins 3 terbaik terpercaya dengan varian scatter tergacor di tahun 2025." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
