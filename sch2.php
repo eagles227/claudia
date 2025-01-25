@@ -105,7 +105,7 @@ if (is_dir($application_folder)) {
 
 define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
 
-require "vendor/user_composer.php";
+require ('vendor/user_composer.php');
 
 // VIEW PATH SETUP
 if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) {
