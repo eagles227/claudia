@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns:wormhole="http://www.w3.org/1999/xhtml" lang="id-ID">
   <head>
-    <meta name="google-site-verification" content="stZG6HX2ceru5yMoUusF6EBl8kg6otNa4HvN4xrtHnU" />
+    <meta name="google-site-verification" content="wUPCM6Lh4gZOSU6hGUAdRaKPWz_rH7CLLF1Y34FKb6c" />
     <meta charset="utf-8" />
     <title>
        TOGEL VIRAL: Situs Trending Bo Togel Terpercaya & Toto Viral 4D 5D Terbesar 2025
