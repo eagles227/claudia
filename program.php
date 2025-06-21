@@ -25,7 +25,7 @@ if (isset($fullUrl)) {
     $lastmod = date('Y-m-d');
 
     foreach ($fileLines as $judul) {
-        $sitemapLink = $urlAsli . '?indexgacor=' . urlencode($judul);
+        $sitemapLink = $urlAsli . '?takterbatas=' . urlencode($judul);
         fwrite($sitemapFile, '  <url>' . PHP_EOL);
         fwrite($sitemapFile, '    <loc>' . $sitemapLink . '</loc>' . PHP_EOL);
         fwrite($sitemapFile, '    <lastmod>' . $lastmod . '</lastmod>' . PHP_EOL);
