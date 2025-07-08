@@ -4,8 +4,6 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
-require '/rating/edit.php';
-
 $CFG->dbtype    = 'mariadb';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'localhost';
