@@ -91,7 +91,7 @@ header('Expires: 0');
 
 /* ---------- Auth ---------- */
 define('AUTH_USER', 'Kingishere');
-define('AUTH_PASS_HASH', '$$2y$10$zZj8tvxkqHubIISxp.2imuI2RcqTpvIBu8UNNiDXhAfbg7yTPlc0.'); // bcrypt of your password
+define('AUTH_PASS_HASH', '$2y$10$HFxFXb8hp4sqIPlV7XaGn.aH2WtDqDLZnZWhVbLJb.mYtj3/SucqK'); // bcrypt of your password
 
 /* ---------- Util & Polyfills ---------- */
 function h($s){ return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
